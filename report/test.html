@@ -1,0 +1,23 @@
+<html>
+<head><title>ngReport test</title>
+<script src="jquery-2.2.2.min.js"></script>
+<script src="angular.min.js"></script></head><style>@page { margin: 0}</style>
+<script src="ngReport.min.js"></script>
+<link rel="stylesheet" href="css/ngReport.css">
+<body>
+<div>
+  <button id="btn-print">Preview</button>
+</div>
+<div id="report-container">
+  <span>{{ 1+1 }}</span>
+</div>
+</body>
+<script src="test.js"></script>
+<script>
+  angular.element(document).ready(function() {
+    $('#btn-print').click(function() {
+      var rep = showReport(angular.element('#report-container'), testReport);
+    });
+  })
+</script>
+</html>
