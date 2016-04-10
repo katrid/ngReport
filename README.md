@@ -11,7 +11,7 @@ Features:
 * AngularJS template and expressions
     * {{sum1}}, {{field1 + field2}}
 * Generic JSON data sources compatible
-    * '[{ name: 'User 1', value: 10 }, { name: 'User 2' }]'
+    * `[{ name: 'User 1', value: 10 }, { name: 'User 2' }]`
 * Client (no server installation) or server side (NodeJS)
 
 Todo:
