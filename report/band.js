@@ -87,7 +87,7 @@
     };
 
     DataBand.prototype.render = function(page) {
-      var c, i, j, len, ref, results, results1, row, rows;
+      var c, i, j, k, len, len1, ref, ref1, results, results1, row, rows, total;
       if (this.data) {
         rows = this.data;
       } else if (this.rowCount) {
@@ -103,6 +103,13 @@
         row = rows[j];
         c++;
         page.document.engine.scope['row'] = c;
+        ref1 = page.document.report.totals;
+        for (k = 0, len1 = ref1.length; k < len1; k++) {
+          total = ref1[k];
+          if (total.band === this) {
+            total.compute(this, page);
+          }
+        }
         page = DataBand.__super__.render.call(this, page, true);
         if (this.maxRows && c >= this.maxRows) {
           break;

@@ -17,6 +17,7 @@
       this.pageNumber = 0;
       this.scope = Runtime.scope;
       this.expCache = {};
+      this.totals = {};
     }
 
     Engine.prototype.bootstrap = function() {

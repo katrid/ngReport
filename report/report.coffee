@@ -1,5 +1,7 @@
 'use strict'
 
+Runtime = require './runtime'
+
 class Units
   @mm: 3.779527559055
   @cm: 37.79527559055
@@ -25,9 +27,18 @@ class Report
     @document = null
     @loaded = false
     @pages = []
+    @totals = []
 
   addPage: (page) ->
     @pages.push(page)
+    
+  findObject: (name) ->
+    for obj in @pages
+      if obj.name is name
+        return obj
+      s = obj.findObject(name)
+      if s
+        return s
 
   load: (report) ->
     @_report = report
@@ -35,6 +46,12 @@ class Report
       page = new Page(@)
       @addPage(page)
       page.load(p)
+    if report.totals
+      Total = Runtime.getComponent('Total')
+      for total in report.totals
+        t = new Total(@)
+        t.load(total)
+        @totals.push(t)
 
   prepare: ->
     if !@prepared

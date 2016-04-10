@@ -9,3 +9,4 @@ module.exports = Runtime
 
 report = require './report'
 text = require './text'
+total = require './total'

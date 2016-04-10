@@ -38,6 +38,21 @@
       return obj;
     };
 
+    BaseObject.prototype.findObject = function(name) {
+      var child, i, len, ref, s;
+      ref = this.children;
+      for (i = 0, len = ref.length; i < len; i++) {
+        child = ref[i];
+        if (child.name === name) {
+          return child;
+        }
+        s = child.findObject(name);
+        if (s) {
+          return s;
+        }
+      }
+    };
+
     BaseObject.prototype.load = function(obj) {
       var child, cls, i, k, len, ref, results, v;
       for (k in obj) {

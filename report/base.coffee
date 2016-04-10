@@ -27,6 +27,14 @@ class BaseObject
     obj.height = @height
     return obj
 
+  findObject: (name) ->
+    for child in @children
+      if child.name is name
+        return child
+      s = child.findObject(name)
+      if s
+        return s
+
   load: (obj) ->
     for k, v of obj
       if k != 'children'

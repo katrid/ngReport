@@ -27,6 +27,9 @@
       $('#btn-prev').click(function() {
         return viewer.prev();
       });
+      $('#btn-last').click(function() {
+        return viewer.last();
+      });
       return this.setPage(0);
     };
 
@@ -57,7 +60,7 @@
     };
 
     HtmlViewer.prototype.renderViewer = function() {
-      return '<div class="ng-report-preview-toolbar"><button id="btn-prev"><< Prev</button><button id="btn-next">Next >></button></div><div class="ng-report-preview-report"><div id="ng-report-preview-container"></div></div>';
+      return '<div class="ng-report-preview-toolbar"><button id="btn-prev"><< Prev</button><button id="btn-next">Next ></button><button id="btn-last">Last >></button></div><div class="ng-report-preview-report"><div id="ng-report-preview-container"></div></div>';
     };
 
     HtmlViewer.prototype.renderObject = function(obj) {

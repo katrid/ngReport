@@ -11,6 +11,7 @@ class Engine
     @pageNumber = 0
     @scope = Runtime.scope
     @expCache = {}
+    @totals = {}
 
   bootstrap: ->
     if !Engine.canvas

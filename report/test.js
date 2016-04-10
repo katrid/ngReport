@@ -1,4 +1,12 @@
 var testReport = {
+  totals: [
+    {
+      func: 'SUM',
+      name: 'SUM1',
+      band: 'dataBand1',
+      expression: 'row'
+    }
+  ],
   pages: [
     {
       marginTop: 20,
@@ -24,7 +32,7 @@ var testReport = {
         {
           type: 'DataBand',
           name: 'dataBand1',
-          rowCount: 100,
+          rowCount: 100000,
           height: 30,
           children: [
             {
@@ -32,8 +40,8 @@ var testReport = {
               left: 0,
               top: 0,
               height: 18,
-              width: 100,
-              text: '{{row}} {{10*2.21}}'
+              width: 350,
+              text: '{{row}} {{10*2.21}} - SUM: {{SUM1}}'
             }, {
               type: 'Text',
               left: 100,

@@ -73,6 +73,10 @@ class DataBand extends Band
     for row in rows
       c++
       page.document.engine.scope['row'] = c
+      # compute totals
+      for total in page.document.report.totals
+        if total.band is @
+          total.compute(@, page)
       page = super(page, true)
       if @maxRows and c >= @maxRows
         break
