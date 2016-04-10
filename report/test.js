@@ -7,9 +7,24 @@ var testReport = {
       marginLeft: 20,
       children: [
         {
+          type: 'ReportTitle',
+          name: 'reportTitle1',
+          height: 35,
+          children: [
+            {
+              type: 'Text',
+              left: 0,
+              top: 0,
+              height: 18,
+              width: 100,
+              text: 'Report Title'
+            }
+          ]
+        },
+        {
           type: 'DataBand',
           name: 'dataBand1',
-          rowCount: 100000,
+          rowCount: 100,
           height: 30,
           children: [
             {
@@ -24,7 +39,7 @@ var testReport = {
               left: 100,
               top: 100,
               height: 18,
-              width: 100,
+              width: 300,
               border: {
                 left: true,
                 bottom: true,
@@ -34,6 +49,21 @@ var testReport = {
                 color: '#b1b1b1'
               },
               text: 'My 2nd text object'
+            }
+          ]
+        },
+        {
+          type: 'PageFooter',
+          name: 'pageFooter1',
+          height: 35,
+          children: [
+            {
+              type: 'Text',
+              left: 0,
+              top: 0,
+              height: 18,
+              width: 100,
+              text: 'Page Footer'
             }
           ]
         }

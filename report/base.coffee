@@ -5,7 +5,6 @@ Runtime = require './runtime'
 class BaseObject
   constructor: (parent) ->
     @name = null
-    @canBreak = true
     @parent = parent
     @children = []
     @exportable = true
@@ -65,6 +64,7 @@ class BaseView extends BaseObject
     obj.width = @width
     # calc offset
     obj.top = @top + page._y
+    obj.bottom = @top + @height
     obj.left = @left + page._x
     return obj
 

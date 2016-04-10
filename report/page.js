@@ -22,6 +22,8 @@
       this.landscape = false;
       this.width = PaperSize.A4.x;
       this.height = PaperSize.A4.y;
+      this._staticBands = null;
+      this._dataBands = null;
     }
 
     Page.prototype._build = function(document) {
@@ -35,21 +37,57 @@
       results = [];
       for (i = 0, len = ref.length; i < len; i++) {
         child = ref[i];
-        results.push(child.clearCache());
+        if (child.clearCache) {
+          results.push(child.clearCache());
+        } else {
+          results.push(void 0);
+        }
       }
       return results;
     };
 
-    Page.prototype.render = function(document) {
-      var child, i, len, page, ref;
+    Page.prototype.newPage = function(document, node) {
+      var band, i, j, k, len, len1, len2, page, ref, ref1, ref2, results;
+      if (!this._staticBands) {
+        this._staticBands = [];
+        this._dataBands = [];
+        ref = this.children;
+        for (i = 0, len = ref.length; i < len; i++) {
+          band = ref[i];
+          if (band._staticBand) {
+            this._staticBands.push(band);
+          } else {
+            this._dataBands.push(band);
+          }
+        }
+      }
       page = this._build(document);
       document.addPage(page);
-      ref = this.children;
-      for (i = 0, len = ref.length; i < len; i++) {
-        child = ref[i];
-        child.render(page);
+      this._page = page;
+      ref1 = this._staticBands;
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        band = ref1[j];
+        band.render(page);
       }
-      return page;
+      if (node) {
+        return page;
+      } else {
+        ref2 = this._dataBands;
+        results = [];
+        for (k = 0, len2 = ref2.length; k < len2; k++) {
+          band = ref2[k];
+          if (!band._childBand) {
+            results.push(band.render(page));
+          } else {
+            results.push(void 0);
+          }
+        }
+        return results;
+      }
+    };
+
+    Page.prototype.render = function(document) {
+      return this.newPage(document);
     };
 
     return Page;

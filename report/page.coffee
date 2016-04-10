@@ -14,6 +14,8 @@ class Page extends base.BaseObject
     @landscape = false
     @width = PaperSize.A4.x
     @height = PaperSize.A4.y
+    @_staticBands = null
+    @_dataBands = null
 
   _build: (document) ->
     return new PreparedPage(document, @)
@@ -21,14 +23,34 @@ class Page extends base.BaseObject
   clearCache: ->
     super()
     for child in @children
-      child.clearCache()
+      if child.clearCache
+        child.clearCache()
 
-  render: (document) ->
+  newPage: (document, node) ->
+    if not @_staticBands
+      @_staticBands = []
+      @_dataBands = []
+      for band in @children
+        if band._staticBand
+          @_staticBands.push(band)
+        else
+          @_dataBands.push(band)
     page = @_build(document)
     document.addPage(page)
-    for child in @children
-      child.render(page)
-    return page
+    @_page = page
+    for band in @_staticBands
+      band.render(page)
+    if node
+      # return to data loop
+      return page
+    else
+      # render data bands
+      for band in @_dataBands
+        if not band._childBand
+          band.render(page)
+      
+  render: (document) ->
+    @newPage(document)
 
 module.exports = Page
 

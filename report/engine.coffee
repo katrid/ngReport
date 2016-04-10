@@ -24,7 +24,7 @@ class Engine
     for p in report.pages
       p.clearCache()
 
-    console.log(doc.pages.length)
+    console.log('Page count:', doc.pages.length)
 
   compileTemplate: (s) ->
     return Runtime.interpolate(s)
@@ -84,10 +84,8 @@ class PreparedPage extends PreparedObject
     @_maxHeight = @page.height - @page.marginTop - @page.marginBottom
     @_maxWidth = @page.width - @page.marginLeft - @page.marginRight
 
-  newPage: () ->
-    page = new PreparedPage(@parent, @page)
-    @document.addPage(page)
-    return page
+  newPage: (document, caller) ->
+    @page.newPage(document, caller)
 
 module.exports =
   Engine: Engine

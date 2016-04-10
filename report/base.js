@@ -10,7 +10,6 @@
   BaseObject = (function() {
     function BaseObject(parent) {
       this.name = null;
-      this.canBreak = true;
       this.parent = parent;
       this.children = [];
       this.exportable = true;
@@ -97,6 +96,7 @@
       obj = BaseView.__super__._build.call(this, page);
       obj.width = this.width;
       obj.top = this.top + page._y;
+      obj.bottom = this.top + this.height;
       obj.left = this.left + page._x;
       return obj;
     };

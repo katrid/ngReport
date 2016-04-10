@@ -38,7 +38,7 @@
         p = ref1[j];
         p.clearCache();
       }
-      return console.log(doc.pages.length);
+      return console.log('Page count:', doc.pages.length);
     };
 
     Engine.prototype.compileTemplate = function(s) {
@@ -131,11 +131,8 @@
       return this._maxWidth = this.page.width - this.page.marginLeft - this.page.marginRight;
     };
 
-    PreparedPage.prototype.newPage = function() {
-      var page;
-      page = new PreparedPage(this.parent, this.page);
-      this.document.addPage(page);
-      return page;
+    PreparedPage.prototype.newPage = function(document, caller) {
+      return this.page.newPage(document, caller);
     };
 
     return PreparedPage;
