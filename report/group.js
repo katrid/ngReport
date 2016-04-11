@@ -16,6 +16,7 @@
 
     function GroupHeader(parent) {
       GroupHeader.__super__.constructor.call(this, parent);
+      this._linkedFooter = null;
       this._printBefore = true;
     }
 

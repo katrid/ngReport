@@ -112,6 +112,20 @@
       return this.document;
     };
 
+    Report.prototype.print = function(format) {
+      var HtmlExport, html, shtml, wnd;
+      if (format == null) {
+        format = 'html';
+      }
+      if (format === 'html') {
+        HtmlExport = require('./html');
+        html = new HtmlExport(this.prepare());
+        wnd = window.open('', 'ngReportPrintWnd');
+        shtml = html.toHtml();
+        return wnd.document.write('<html><head><link href="css/print.css" rel="stylesheet" type="text/css"></head><body><div style="display: table">' + shtml + '</div></body></html>');
+      }
+    };
+
     return Report;
 
   })();

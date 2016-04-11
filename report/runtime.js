@@ -16,6 +16,10 @@
       return this.components[comp.getClassName()] = comp;
     };
 
+    Runtime.registerFormat = function(format) {
+      return this.formats[format.getClassName()] = format;
+    };
+
     return Runtime;
 
   })();

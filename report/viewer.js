@@ -16,11 +16,18 @@
     };
 
     HtmlViewer.prototype.show = function() {
-      var s, viewer;
+      var report, s, viewer;
       s = this.renderViewer();
       $(this.element).html(s);
       this.container = $('#ng-report-preview-container');
       viewer = this;
+      report = this.document.report;
+      $('#btn-print').click(function() {
+        return report.print();
+      });
+      $('#btn-first').click(function() {
+        return viewer.first();
+      });
       $('#btn-next').click(function() {
         return viewer.next();
       });
@@ -60,7 +67,7 @@
     };
 
     HtmlViewer.prototype.renderViewer = function() {
-      return '<div class="ng-report-preview-toolbar"><button id="btn-prev"><< Prev</button><button id="btn-next">Next ></button><button id="btn-last">Last >></button></div><div class="ng-report-preview-report"><div id="ng-report-preview-container"></div></div>';
+      return '<div class="ng-report-preview-toolbar"><button id="btn-print">Print</button><br><button id="btn-first"><< First</button><button id="btn-prev">< Prev</button><button id="btn-next">Next ></button><button id="btn-last">Last >></button></div><div class="ng-report-preview-report"><div id="ng-report-preview-container"></div></div>';
     };
 
     HtmlViewer.prototype.renderObject = function(obj) {

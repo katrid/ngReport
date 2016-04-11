@@ -7,6 +7,7 @@ class GroupHeader extends ChildBand
 
   constructor: (parent) ->
     super(parent)
+    @_linkedFooter = null
     @_printBefore = true
 
   parentNotification: (band, page) ->

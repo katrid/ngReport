@@ -28,5 +28,10 @@ showReport = (el, rep, viewerType) ->
     v = new viewer.HtmlViewer(doc, el)
   v.show()
 
+printReport = (el, rep, format='html') ->
+  doc = loadReport(el, rep)
+  doc.report.print(format)
+
 document.loadReport = loadReport
 window.showReport = showReport
+window.printReport = printReport

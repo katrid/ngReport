@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "pdf.js",
+  "sourceRoot": "",
+  "sources": [
+    "pdf.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;;AAAA"
+}

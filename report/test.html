@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="css/ngReport.css">
 <body>
 <div>
-  <button id="btn-print">Preview</button>
+  <button id="btn-preview">Preview</button>
 </div>
 <div id="report-container">
   <span>{{ 1+1 }}</span>
@@ -15,7 +15,7 @@
 <script src="test.js"></script>
 <script>
   angular.element(document).ready(function() {
-    $('#btn-print').click(function() {
+    $('#btn-preview').click(function() {
       var rep = showReport(angular.element('#report-container'), testReport);
     });
   })

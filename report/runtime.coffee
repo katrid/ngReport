@@ -4,6 +4,7 @@ class Runtime
   @components = {}
   @getComponent: (name) -> @components[name]
   @registerComponent: (comp) -> @components[comp.getClassName()] = comp
+  @registerFormat: (format) -> @formats[format.getClassName()] = format
 
 module.exports = Runtime
 
