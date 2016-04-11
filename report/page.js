@@ -46,6 +46,34 @@
       return results;
     };
 
+    Page.prototype.load = function(obj) {
+      var band, child, childrenBands, i, j, len, len1, oldBand, ref, results;
+      Page.__super__.load.call(this, obj);
+      childrenBands = [];
+      ref = this.children;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        band = ref[i];
+        if (band._childBand) {
+          if (band._printBefore) {
+            childrenBands.push(band);
+          } else {
+            oldBand.childrenBands.push(band);
+          }
+          continue;
+        } else if (childrenBands.length) {
+          for (j = 0, len1 = childrenBands.length; j < len1; j++) {
+            child = childrenBands[j];
+            child.parentBand = band;
+            band.childrenBands.push(child);
+          }
+          childrenBands = [];
+        }
+        results.push(oldBand = band);
+      }
+      return results;
+    };
+
     Page.prototype.newPage = function(document, node) {
       var band, i, j, k, len, len1, len2, page, ref, ref1, ref2, results;
       if (!this._staticBands) {
@@ -56,7 +84,7 @@
           band = ref[i];
           if (band._staticBand) {
             this._staticBands.push(band);
-          } else {
+          } else if (!band._childBand) {
             this._dataBands.push(band);
           }
         }

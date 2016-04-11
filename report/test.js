@@ -30,6 +30,19 @@ var testReport = {
           ]
         },
         {
+          type: 'GroupHeader',
+          expression: 'row.toString()[0]',
+          children: [
+            {
+              type: 'Text',
+              left: 0,
+              top: 0,
+              text: 'GROUP BY: row.toString()[0] -> {{row.toString()[0]}}'
+            }
+          ],
+          height: 20
+        },
+        {
           type: 'DataBand',
           name: 'dataBand1',
           rowCount: 100000,

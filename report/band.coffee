@@ -10,6 +10,8 @@ class Band extends base.BaseObject
     super(parent)
     @canShrink = false
     @canBreak = false
+    @childrenBands = []
+    @startNewPage = false
     @_fixed = false
     @_staticBand = false
     @_childBand = false
@@ -17,6 +19,13 @@ class Band extends base.BaseObject
   render: (page, caller) ->
     if @name
       page.document.engine.scope[@name] = this
+
+    # render before children bands
+    if @childrenBands
+      for band in @childrenBands
+        if band._printBefore and band.parentNotification
+          page = band.parentNotification(@, page)
+
     h = 0
     for child in @children
       obj = child.render(page)
@@ -44,6 +53,13 @@ class Band extends base.BaseObject
         page.addObject(child._obj)
         delete child._obj
     page._y += h
+
+    # render after children bands
+    if @childrenBands
+      for band in @childrenBands
+        if not band._printBefore and band.parentNotification
+          page = band.parentNotification(@, page)
+
     return page
 
 
@@ -55,6 +71,7 @@ class DataBand extends Band
     @maxRows = 0
     @rowCount = 1
     @data = null
+    @keepTogether = false
     @_y = 0
 
   _calcHeight: () ->
@@ -67,8 +84,6 @@ class DataBand extends Band
     else if @rowCount
       rows = [1..@rowCount]
 
-    # TODO check child bands
-
     c = 0
     for row in rows
       c++
@@ -80,6 +95,15 @@ class DataBand extends Band
       page = super(page, true)
       if @maxRows and c >= @maxRows
         break
+
+class ChildBand extends Band
+  @getClassName -> 'Child'
+
+  constructor: (parent) ->
+    super(parent)
+    @parentBand = null
+    @_childBand = true
+    @_printBefore = false
 
 class ReportTitle extends Band
   @getClassName: -> 'ReportTitle'
@@ -112,7 +136,7 @@ class PageFooter extends Band
     page._maxHeight -= @height
     page._y = oy
 
-Runtime.registerComponent(Band)
+Runtime.registerComponent(ChildBand)
 Runtime.registerComponent(DataBand)
 Runtime.registerComponent(ReportTitle)
 Runtime.registerComponent(PageHeader)
@@ -121,3 +145,6 @@ Runtime.registerComponent(PageFooter)
 module.exports =
   Band: Band
   DataBand: DataBand
+  ChildBand: ChildBand
+  PageHeader: PageHeader
+  PageFooter: PageFooter

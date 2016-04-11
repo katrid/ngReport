@@ -67,6 +67,7 @@ module.exports =
 
 Document = require('./engine').Document
 Page = require('./page')
+require './group'
 require './base'
 require './band'
 require './text'

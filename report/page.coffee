@@ -25,6 +25,25 @@ class Page extends base.BaseObject
     for child in @children
       if child.clearCache
         child.clearCache()
+        
+  load: (obj) ->
+    super(obj)
+    
+    # detect nested children bands
+    childrenBands = []
+    for band in @children
+      if band._childBand
+        if band._printBefore
+          childrenBands.push(band)
+        else
+          oldBand.childrenBands.push(band)
+        continue
+      else if childrenBands.length
+        for child in childrenBands
+          child.parentBand = band
+          band.childrenBands.push(child)
+        childrenBands = []
+      oldBand = band
 
   newPage: (document, node) ->
     if not @_staticBands
@@ -33,7 +52,7 @@ class Page extends base.BaseObject
       for band in @children
         if band._staticBand
           @_staticBands.push(band)
-        else
+        else if not band._childBand
           @_dataBands.push(band)
     page = @_build(document)
     document.addPage(page)

@@ -13,6 +13,7 @@ Features:
 * Generic JSON data sources compatible
     * `[{ name: 'User 1', value: 10 }, { name: 'User 2' }]`
 * Client (no server installation) or server side (NodeJS)
+* Easy integration
 
 Todo:
 * Generate PDF directly on client-side (Web Browser)

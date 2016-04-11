@@ -7,6 +7,7 @@ class Runtime
 
 module.exports = Runtime
 
-report = require './report'
-text = require './text'
-total = require './total'
+require './report'
+require './group'
+require './text'
+require './total'

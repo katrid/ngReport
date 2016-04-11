@@ -126,6 +126,8 @@
 
   Page = require('./page');
 
+  require('./group');
+
   require('./base');
 
   require('./band');
