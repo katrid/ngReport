@@ -8,6 +8,7 @@ Features:
 * High Performance
 * Component and band oriented reports
     * Page -> Band -> Text ( Expression )
+* Grouping, SUM, AVG, MIN, MAX...
 * AngularJS template and expressions
     * `{{sum1}}, {{field1 + field2}}`
 * Generic JSON data sources compatible
