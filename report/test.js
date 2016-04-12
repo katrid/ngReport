@@ -45,7 +45,7 @@ var testReport = {
         {
           type: 'DataBand',
           name: 'dataBand1',
-          rowCount: 1000,
+          rowCount: 10000,
           height: 30,
           children: [
             {
