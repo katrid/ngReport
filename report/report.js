@@ -123,8 +123,7 @@
         wnd = window.open('', 'ngReportPrintWnd');
         shtml = html.toHtml();
         wnd.document.write('<html><head><link href="css/print.css" rel="stylesheet" type="text/css"></head><body><div style="display: table">' + shtml + '</div></body></html>');
-        wnd.print();
-        return wnd.close();
+        return wnd.print();
       }
     };
 
