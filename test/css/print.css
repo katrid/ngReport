@@ -1,0 +1,13 @@
+@media print {
+    .ng-report-print-page {
+        page-break-after: always;
+    }
+}
+
+.ng-report-print-page {
+    position: relative;
+}
+
+body {
+    margin: 0;
+}
