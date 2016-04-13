@@ -1,4 +1,8 @@
 @media print {
+    body {
+        margin: 0;
+    }
+
     .ng-report-print-page {
         page-break-after: always;
     }
