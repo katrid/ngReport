@@ -24,3 +24,6 @@ Todo:
 
 Additional Packages:
 * Report Designer
+
+# License
+ngReport is available under the MIT license.
